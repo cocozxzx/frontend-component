@@ -8,7 +8,12 @@
       "Bash(npx tsc *)",
       "Bash(npx vite *)",
       "Bash(ls src/router/)",
-      "Bash(ls src/layouts/)"
+      "Bash(ls src/layouts/)",
+      "Bash(node -e \"const p=require\\('./package.json'\\); const deps={...p.dependencies,...p.devDependencies}; const radix=Object.keys\\(deps\\).filter\\(k=>k.includes\\('radix'\\)\\); console.log\\('radix packages:', radix\\)\")",
+      "Bash(npx shadcn@latest add button input badge avatar tooltip separator breadcrumb dropdown-menu sheet command dialog scroll-area -y)",
+      "Bash(node -e \"const p=require\\('./package.json'\\);const d={...p.dependencies,...p.devDependencies};const r=Object.keys\\(d\\).filter\\(k=>k.includes\\('radix'\\)\\);console.log\\('radix packages installed:',r.length,r.join\\(', '\\)\\)\")",
+      "Bash(ls \"@/components/ui/\")",
+      "Bash(ls \"@/\")"
     ]
   }
 }
