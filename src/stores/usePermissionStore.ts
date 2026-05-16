@@ -1,22 +1,44 @@
 import { create } from 'zustand'
 
 interface PermissionStore {
-  /** 当前用户权限列表，'*' 表示超级管理员（全部权限） */
+  /** 权限标识列表，'*' 表示超级管理员 */
   permissions: string[]
-  setPermissions: (perms: string[]) => void
-  hasPermission: (perm: string | string[]) => boolean
+  /** 角色列表 */
+  roles: string[]
+
+  setPermissions: (permissions: string[], roles?: string[]) => void
+  /** OR 逻辑：包含任意一个即通过 */
+  hasPermission: (permission: string | string[]) => boolean
+  /** AND 逻辑：必须包含全部才通过 */
+  hasAllPermissions: (permissions: string[]) => boolean
+  hasRole: (role: string | string[]) => boolean
+  reset: () => void
 }
 
 export const usePermissionStore = create<PermissionStore>()((set, get) => ({
-  // 默认拥有全部权限；接入真实 auth 后通过 setPermissions 替换
   permissions: ['*'],
+  roles: [],
 
-  setPermissions: (perms) => set({ permissions: perms }),
+  setPermissions: (permissions, roles = []) => set({ permissions, roles }),
 
-  hasPermission: (perm) => {
+  hasPermission: (permission) => {
     const { permissions } = get()
     if (permissions.includes('*')) return true
-    if (Array.isArray(perm)) return perm.every((p) => permissions.includes(p))
-    return permissions.includes(perm)
+    if (Array.isArray(permission)) return permission.some((p) => permissions.includes(p))
+    return permissions.includes(permission)
   },
+
+  hasAllPermissions: (perms) => {
+    const { permissions } = get()
+    if (permissions.includes('*')) return true
+    return perms.every((p) => permissions.includes(p))
+  },
+
+  hasRole: (role) => {
+    const { roles } = get()
+    if (Array.isArray(role)) return role.some((r) => roles.includes(r))
+    return roles.includes(role)
+  },
+
+  reset: () => set({ permissions: [], roles: [] }),
 }))
