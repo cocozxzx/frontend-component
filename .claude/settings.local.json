@@ -30,7 +30,9 @@
       "Bash(node -e \"const p=require\\('./node_modules/lowlight/package.json'\\);console.log\\('lowlight version:',p.version,'exports:',Object.keys\\(p.exports||{}\\).slice\\(0,5\\)\\)\")",
       "Bash(node -e \"import\\('./node_modules/lowlight/lib/index.js'\\).then\\(m=>console.log\\('exports:',Object.keys\\(m\\).slice\\(0,10\\)\\)\\)\")",
       "Bash(node -e \"const p=require\\('./node_modules/@tiptap/extension-placeholder/package.json'\\);console.log\\('placeholder version:',p.version\\)\")",
-      "Bash(node -e \"const p=require\\('./node_modules/lowlight/package.json'\\);console.log\\(JSON.stringify\\(p.exports,null,2\\)\\)\")"
+      "Bash(node -e \"const p=require\\('./node_modules/lowlight/package.json'\\);console.log\\(JSON.stringify\\(p.exports,null,2\\)\\)\")",
+      "Bash(node -e \"const p=require\\('./package.json'\\);const d={...p.dependencies};console.log\\('@dnd-kit/core:',d['@dnd-kit/core'],'@tanstack/react-virtual:',d['@tanstack/react-virtual'],'@tanstack/react-table:',d['@tanstack/react-table']\\)\")",
+      "Bash(ls src/components/display/)"
     ]
   }
 }
