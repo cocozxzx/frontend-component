@@ -24,6 +24,8 @@ interface AppStore extends AppConfig {
   setColorMode: (mode: AppConfig['colorMode']) => void
   setBorderRadius: (radius: number) => void
   setCompactMode: (compact: boolean) => void
+  /** Generic partial update for simple boolean/value fields without side effects */
+  updateConfig: (partial: Partial<AppConfig>) => void
   resetConfig: () => void
   getConfigJson: () => string
 }
@@ -83,6 +85,8 @@ export const useAppStore = create<AppStore>()(
         document.documentElement.classList.toggle('compact', compact)
         set({ compactMode: compact })
       },
+
+      updateConfig: (partial) => set(partial),
 
       resetConfig: () => {
         applyThemeColor(defaultConfig.primaryColor)

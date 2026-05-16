@@ -13,7 +13,8 @@
       "Bash(npx shadcn@latest add button input badge avatar tooltip separator breadcrumb dropdown-menu sheet command dialog scroll-area -y)",
       "Bash(node -e \"const p=require\\('./package.json'\\);const d={...p.dependencies,...p.devDependencies};const r=Object.keys\\(d\\).filter\\(k=>k.includes\\('radix'\\)\\);console.log\\('radix packages installed:',r.length,r.join\\(', '\\)\\)\")",
       "Bash(ls \"@/components/ui/\")",
-      "Bash(ls \"@/\")"
+      "Bash(ls \"@/\")",
+      "Bash(npx shadcn@latest add switch slider sonner -y)"
     ]
   }
 }

@@ -31,6 +31,7 @@ import { menuConfig, flatMenuLeaves } from '@/config/menu'
 import { AppLogo } from './AppLogo'
 import { AppTopNav } from './AppTopNav'
 import { AppBreadcrumb } from './AppBreadcrumb'
+import { ThemeDrawer } from './ThemeDrawer'
 
 const NOTIFICATION_COUNT = 5
 
@@ -45,6 +46,7 @@ export function AppHeader({ onMobileMenuToggle }: AppHeaderProps) {
   const { colorMode, setColorMode, isDark } = useTheme()
 
   const [commandOpen, setCommandOpen] = useState(false)
+  const [themeDrawerOpen, setThemeDrawerOpen] = useState(false)
   const [isFullscreen, setIsFullscreen] = useState(false)
 
   // Fullscreen tracking
@@ -155,8 +157,8 @@ export function AppHeader({ onMobileMenuToggle }: AppHeaderProps) {
             {isDark ? <Sun size={17} /> : <Moon size={17} />}
           </Button>
 
-          {/* Theme settings (placeholder — ThemeDrawer in later step) */}
-          <Button variant="ghost" size="icon">
+          {/* Theme settings */}
+          <Button variant="ghost" size="icon" onClick={() => setThemeDrawerOpen(true)}>
             <Settings size={17} />
           </Button>
 
@@ -197,6 +199,9 @@ export function AppHeader({ onMobileMenuToggle }: AppHeaderProps) {
           </DropdownMenu>
         </div>
       </header>
+
+      {/* Theme drawer */}
+      <ThemeDrawer open={themeDrawerOpen} onOpenChange={setThemeDrawerOpen} />
 
       {/* Command search dialog */}
       <CommandDialog open={commandOpen} onOpenChange={setCommandOpen}>
