@@ -21,7 +21,8 @@
       "Bash(node -e \"const p=require\\('./package.json'\\);console.log\\('@tanstack/react-table:',p.dependencies['@tanstack/react-table']||'NOT installed','react-hook-form:',p.dependencies['react-hook-form'],'zod:',p.dependencies['zod']\\)\")",
       "Bash(npx shadcn@latest add form -y)",
       "Bash(mv \"@/components/ui/\"*.tsx src/components/ui/)",
-      "Bash(rm -rf \"@\")"
+      "Bash(rm -rf \"@\")",
+      "Bash(node -e \"const p=require\\('./package.json'\\);console.log\\('axios:',p.dependencies['axios'],'react-day-picker:',p.dependencies['react-day-picker']||'\\(transitive\\)'\\)\")"
     ]
   }
 }
