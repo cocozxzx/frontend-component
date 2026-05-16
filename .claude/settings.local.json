@@ -34,7 +34,11 @@
       "Bash(node -e \"const p=require\\('./package.json'\\);const d={...p.dependencies};console.log\\('@dnd-kit/core:',d['@dnd-kit/core'],'@tanstack/react-virtual:',d['@tanstack/react-virtual'],'@tanstack/react-table:',d['@tanstack/react-table']\\)\")",
       "Bash(ls src/components/display/)",
       "Bash(node -e \"const p=require\\('./package.json'\\);console.log\\('countup.js:',p.dependencies['countup.js']\\)\")",
-      "Bash(node -e \"const p=require\\('./package.json'\\);const d={...p.dependencies};['embla-carousel-react','embla-carousel-autoplay','embla-carousel-auto-height','qrcode','@types/qrcode'].forEach\\(k=>console.log\\(k+':',d[k]||p.devDependencies[k]||'NOT INSTALLED'\\)\\)\")"
+      "Bash(node -e \"const p=require\\('./package.json'\\);const d={...p.dependencies};['embla-carousel-react','embla-carousel-autoplay','embla-carousel-auto-height','qrcode','@types/qrcode'].forEach\\(k=>console.log\\(k+':',d[k]||p.devDependencies[k]||'NOT INSTALLED'\\)\\)\")",
+      "Bash(node -e \"const p=require\\('./package.json'\\);['echarts','echarts-for-react','chroma-js'].forEach\\(k=>console.log\\(k+':',p.dependencies[k]||'NOT INSTALLED'\\)\\)\")",
+      "Bash(ls src/components/charts/)",
+      "Bash(node -e \"require\\('countup.js'\\)\")",
+      "Bash(npm run *)"
     ]
   }
 }
