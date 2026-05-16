@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Outlet } from 'react-router'
 import { useAppStore } from '@/stores/useAppStore'
 import { menuConfig } from '@/config/menu'
+import { ModalContainer } from '@/components/base/ModalContainer'
 import { AppHeader } from './AppHeader'
 import { AppSidebar } from './AppSidebar'
 import { AppFooter } from './AppFooter'
@@ -26,6 +27,7 @@ export function AppLayoutContent() {
           <Outlet />
         </main>
         {showFooter && <AppFooter />}
+        <ModalContainer />
       </div>
     )
   }
@@ -44,6 +46,7 @@ export function AppLayoutContent() {
           </main>
           {showFooter && <AppFooter />}
         </div>
+        <ModalContainer />
       </div>
     )
   }
@@ -90,6 +93,7 @@ function MixLayout({
         </main>
       </div>
       {showFooter && <AppFooter />}
+      <ModalContainer />
     </div>
   )
 }
