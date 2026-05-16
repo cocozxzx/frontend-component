@@ -1,3 +1,8 @@
+export { Anchor, AnchorLink, type AnchorProps, type AnchorLinkProps, type AnchorLinkConfig } from './Anchor'
+export { Descriptions, DescriptionsItem, type DescriptionsProps, type DescriptionsItemProps } from './Descriptions'
 export { List, ListItem, type ListProps, type ListItemProps } from './List'
+export { Statistic, type StatisticProps } from './Statistic'
+export { Steps, type StepsProps, type StepItem, type StepStatus } from './Steps'
+export { Timeline, TimelineItem, type TimelineProps, type TimelineItemProps } from './Timeline'
 export { Tree, type TreeProps, type TreeNodeData, type DropInfo } from './Tree'
 export { VirtualList, type VirtualListProps } from './VirtualList'
