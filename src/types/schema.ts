@@ -100,3 +100,82 @@ export interface ProTableSchema {
   striped?: boolean
   size?: 'sm' | 'md' | 'lg'
 }
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// ProForm Types
+// ═══════════════════════════════════════════════════════════════════════════════
+
+export type FormFieldType =
+  | 'input' | 'textarea' | 'number' | 'password'
+  | 'select' | 'multi-select' | 'virtual-select'
+  | 'checkbox' | 'checkbox-group' | 'radio' | 'switch'
+  | 'slider' | 'rate' | 'date' | 'datetime' | 'date-range'
+  | 'time' | 'color' | 'upload' | 'rich-editor' | 'tags-input'
+  | 'custom'
+
+export interface FormFieldOption {
+  label: string
+  value: string | number
+  disabled?: boolean
+}
+
+export interface ZodRuleConfig {
+  min?: number
+  max?: number
+  minLength?: number
+  maxLength?: number
+  pattern?: string
+  patternMessage?: string
+  email?: boolean
+  url?: boolean
+  custom?: string
+}
+
+export interface FormField {
+  field: string
+  label?: string
+  type: FormFieldType
+  placeholder?: string
+  defaultValue?: unknown
+  /** boolean or JS expression with `values` in scope */
+  disabled?: boolean | string
+  /** boolean or JS expression with `values` in scope */
+  hidden?: boolean | string
+  required?: boolean
+  rules?: ZodRuleConfig
+  options?: FormFieldOption[]
+  remote?: {
+    api: string
+    labelField?: string
+    valueField?: string
+    params?: Record<string, unknown>
+  }
+  span?: 6 | 8 | 12 | 24
+  /** Extra props passed through to the underlying component */
+  props?: Record<string, unknown>
+  renderKey?: string
+  help?: string
+  tooltip?: string
+}
+
+export interface FormGroup {
+  title?: string
+  description?: string
+  collapsible?: boolean
+  defaultCollapsed?: boolean
+  fields: FormField[]
+  columns?: number
+}
+
+export interface ProFormSchema {
+  fields?: FormField[]
+  groups?: FormGroup[]
+  layout?: 'vertical' | 'horizontal'
+  labelWidth?: string | number
+  columns?: number
+  submitText?: string
+  resetText?: string
+  showSubmit?: boolean
+  showReset?: boolean
+  submitPosition?: 'left' | 'center' | 'right'
+}
