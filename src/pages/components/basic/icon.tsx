@@ -1,22 +1,13 @@
 import { useState, useMemo } from 'react'
-import * as LucideIcons from 'lucide-react'
+import { icons } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Search, CheckCheck, Copy } from 'lucide-react'
 import { toast } from '@/hooks/useToast'
 import { PageHeader } from '@/components/preview'
+import type { LucideIcon } from 'lucide-react'
 
-// lucide-react v1.x exports icons as forwardRef or memo objects (not plain functions).
-// We match any PascalCase export that is not a known utility.
-const EXCLUDED = new Set(['createLucideIcon', 'icons', 'default'])
-
-type IconEntry = [string, React.ComponentType<{ size?: number; className?: string }>]
-
-const ALL_ICONS = (Object.entries(LucideIcons) as IconEntry[]).filter(
-  ([name, value]) =>
-    /^[A-Z][a-zA-Z0-9]+$/.test(name) &&
-    !EXCLUDED.has(name) &&
-    value != null,
-)
+// lucide-react exports a dedicated `icons` Record<string, LucideIcon> for enumeration
+const ALL_ICONS = Object.entries(icons) as [string, LucideIcon][]
 
 export default function IconPage() {
   const [search, setSearch] = useState('')
@@ -41,7 +32,7 @@ export default function IconPage() {
     <div className="p-6 space-y-6 max-w-5xl">
       <PageHeader
         title="Icon 图标"
-        description={`基于 lucide-react 的图标库，共 ${ALL_ICONS.length} 个图标。搜索并点击复制组件代码。`}
+        description={`基于 lucide-react，共 ${ALL_ICONS.length} 个图标。搜索并点击图标复制组件代码。`}
         tags={['lucide-react', '基础组件']}
       />
 
@@ -57,23 +48,23 @@ export default function IconPage() {
 
       <p className="text-sm text-muted-foreground">
         显示 {filtered.length} / {ALL_ICONS.length} 个图标 · 点击复制{' '}
-        <code className="bg-muted px-1 rounded text-xs">{`<IconName size={16} />`}</code>
+        <code className="rounded bg-muted px-1 text-xs">{`<IconName size={16} />`}</code>
       </p>
 
-      <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-1.5">
+      <div className="grid grid-cols-4 gap-1.5 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10">
         {filtered.map(([name, Icon]) => (
           <button
             key={name}
             type="button"
             onClick={() => handleCopy(name)}
-            className="group flex flex-col items-center gap-1 p-2 rounded-lg border border-transparent hover:border-border hover:bg-muted/50 transition-colors"
             title={`${name} — 点击复制`}
+            className="group flex flex-col items-center gap-1 rounded-lg border border-transparent p-2 transition-colors hover:border-border hover:bg-muted/50"
           >
             {copied === name
               ? <CheckCheck size={16} className="text-success" />
-              : <Icon size={16} className="text-foreground group-hover:text-primary transition-colors" />
+              : <Icon size={16} className="text-foreground transition-colors group-hover:text-primary" />
             }
-            <span className="text-[9px] text-muted-foreground truncate w-full text-center leading-tight">
+            <span className="w-full truncate text-center text-[9px] leading-tight text-muted-foreground">
               {name}
             </span>
           </button>
@@ -81,9 +72,9 @@ export default function IconPage() {
       </div>
 
       {filtered.length === 0 && (
-        <div className="flex flex-col items-center py-12 text-muted-foreground gap-2">
+        <div className="flex flex-col items-center gap-2 py-12 text-muted-foreground">
           <Copy size={32} className="opacity-30" />
-          <p className="text-sm">没有找到 &quot;{search}&quot; 相关图标</p>
+          <p className="text-sm">没有找到「{search}」相关图标</p>
         </div>
       )}
     </div>

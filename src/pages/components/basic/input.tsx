@@ -1,4 +1,4 @@
-import { Search, Eye, EyeOff } from 'lucide-react'
+import { Search, Eye, EyeOff, Globe, AtSign } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { AppInput } from '@/components/base/AppInput'
 import { PageHeader, DemoSection, ComponentDemo, PropsTable } from '@/components/preview'
@@ -38,18 +38,17 @@ export default function InputPage() {
 
       <DemoSection title="前后缀">
         <ComponentDemo
-          title="prefix / suffix 插槽"
+          title="prefix / suffix 图标插槽"
           code={`<AppInput prefix={<Search size={15} />} placeholder="搜索..." />
-<AppInput suffix={<Eye size={15} />} placeholder="密码" type="password" />`}
+<AppInput suffix={<Eye size={15} />} placeholder="密码" type="password" />
+<AppInput prefix={<Globe size={15} />} placeholder="请输入网址" />
+<AppInput prefix={<AtSign size={15} />} placeholder="请输入邮箱" />`}
         >
           <div className="max-w-sm space-y-3">
             <AppInput prefix={<Search size={15} className="text-muted-foreground" />} placeholder="搜索..." />
             <AppInput suffix={<Eye size={15} className="text-muted-foreground" />} placeholder="密码" type="password" />
-            <AppInput
-              prefix={<span className="text-muted-foreground text-sm">https://</span>}
-              suffix={<span className="text-muted-foreground text-sm">.com</span>}
-              placeholder="域名"
-            />
+            <AppInput prefix={<Globe size={15} className="text-muted-foreground" />} placeholder="请输入网址" />
+            <AppInput prefix={<AtSign size={15} className="text-muted-foreground" />} placeholder="请输入邮箱" />
           </div>
         </ComponentDemo>
       </DemoSection>
