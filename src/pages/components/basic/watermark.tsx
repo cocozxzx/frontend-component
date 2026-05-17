@@ -8,7 +8,7 @@ import { PageHeader, DemoSection, ComponentDemo, PropsTable } from '@/components
 import type { PropItem } from '@/components/preview'
 
 const PROPS: PropItem[] = [
-  { name: 'text', type: 'string | string[]', required: true, description: '水印文字（多行传数组）' },
+  { name: 'content', type: 'string | string[]', description: '水印文字（多行传数组）' },
   { name: 'fontSize', type: 'number', default: '14', description: '字体大小' },
   { name: 'opacity', type: 'number', default: '0.15', description: '透明度（0-1）' },
   { name: 'rotate', type: 'number', default: '-22', description: '旋转角度' },
@@ -36,10 +36,10 @@ export default function WatermarkPage() {
       />
 
       <DemoSection title="文字水印">
-        <ComponentDemo title="基础水印" code={`<Watermark text="内部资料">
+        <ComponentDemo title="基础水印" code={`<Watermark content="内部资料">
   <div className="h-48 border rounded-lg" />
 </Watermark>`}>
-          <Watermark text="内部资料">
+          <Watermark content="内部资料">
             <div className="h-48 border rounded-lg bg-muted/10 flex items-center justify-center">
               <p className="text-sm text-muted-foreground">受保护的内容区域</p>
             </div>
@@ -48,10 +48,10 @@ export default function WatermarkPage() {
       </DemoSection>
 
       <DemoSection title="多行水印">
-        <ComponentDemo title="text 传数组实现多行" code={`<Watermark text={['机密文件', 'CONFIDENTIAL', '禁止传播']}>
+        <ComponentDemo title="text 传数组实现多行" code={`<Watermark content={['机密文件', 'CONFIDENTIAL', '禁止传播']}>
   <div className="h-48 border rounded-lg" />
 </Watermark>`}>
-          <Watermark text={['机密文件', 'CONFIDENTIAL', '请勿外传']}>
+          <Watermark content={['机密文件', 'CONFIDENTIAL', '请勿外传']}>
             <div className="h-48 border rounded-lg bg-muted/10 flex items-center justify-center">
               <p className="text-sm text-muted-foreground">多行水印内容区域</p>
             </div>
@@ -61,7 +61,7 @@ export default function WatermarkPage() {
 
       <DemoSection title="自定义参数">
         <ComponentDemo title="交互式调整文字、透明度、角度" code={`<Watermark
-  text={text}
+  content={text}
   opacity={opacity}
   rotate={rotate}
 >
@@ -82,7 +82,7 @@ export default function WatermarkPage() {
                 <Slider value={[rotate]} onValueChange={([v]) => setRotate(v)} min={-45} max={0} step={1} />
               </div>
             </div>
-            <Watermark text={text} opacity={opacity} rotate={rotate}>
+            <Watermark content={text} opacity={opacity} rotate={rotate}>
               <div className="h-48 border rounded-lg bg-muted/10 flex items-center justify-center">
                 <p className="text-sm text-muted-foreground">动态调整水印参数</p>
               </div>
@@ -92,12 +92,12 @@ export default function WatermarkPage() {
       </DemoSection>
 
       <DemoSection title="全屏水印">
-        <ComponentDemo title="fullscreen=true（3s 后自动关闭）" code={`<Watermark text="机密文件" fullscreen />`}>
+        <ComponentDemo title="fullscreen=true（3s 后自动关闭）" code={`<Watermark content="机密文件" fullscreen />`}>
           <div>
             <Button variant="outline" onClick={toggleFullscreen}>
               触发全屏水印（3s）
             </Button>
-            {fullscreen && <Watermark text={['机密文件', 'CONFIDENTIAL']} fullscreen opacity={0.1} />}
+            {fullscreen && <Watermark content={['机密文件', 'CONFIDENTIAL']} fullscreen opacity={0.1} />}
           </div>
         </ComponentDemo>
       </DemoSection>
