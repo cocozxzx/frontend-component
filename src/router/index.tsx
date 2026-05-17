@@ -30,8 +30,40 @@ const Error403Page = React.lazy(() => import('@/pages/error/403'))
 const Error404Page = React.lazy(() => import('@/pages/error/404'))
 const Error500Page = React.lazy(() => import('@/pages/error/500'))
 
-// ─── 占位页工厂（后续步骤替换为真实 import） ───
-function placeholder(name: string): ComponentType {
+// ─── 基础组件页（真实 import） ───
+const ButtonPage = React.lazy(() => import('@/pages/components/basic/button'))
+const InputPage = React.lazy(() => import('@/pages/components/basic/input'))
+const SelectPage = React.lazy(() => import('@/pages/components/basic/select'))
+const FormPage = React.lazy(() => import('@/pages/components/basic/form'))
+const TablePage = React.lazy(() => import('@/pages/components/basic/table'))
+const ModalPage = React.lazy(() => import('@/pages/components/basic/modal'))
+const DrawerPage = React.lazy(() => import('@/pages/components/basic/drawer'))
+const TabsPage = React.lazy(() => import('@/pages/components/basic/tabs'))
+const CardPage = React.lazy(() => import('@/pages/components/basic/card'))
+const BadgePage = React.lazy(() => import('@/pages/components/basic/badge'))
+const AvatarPage = React.lazy(() => import('@/pages/components/basic/avatar'))
+const TooltipPage = React.lazy(() => import('@/pages/components/basic/tooltip'))
+const PopoverPage = React.lazy(() => import('@/pages/components/basic/popover'))
+const AlertPage = React.lazy(() => import('@/pages/components/basic/alert'))
+const ToastPage = React.lazy(() => import('@/pages/components/basic/toast'))
+const ProgressPage = React.lazy(() => import('@/pages/components/basic/progress'))
+const SkeletonPage = React.lazy(() => import('@/pages/components/basic/skeleton'))
+const EmptyPage = React.lazy(() => import('@/pages/components/basic/empty'))
+const ResultPage = React.lazy(() => import('@/pages/components/basic/result'))
+const SpinPage = React.lazy(() => import('@/pages/components/basic/spin'))
+const PaginationPage = React.lazy(() => import('@/pages/components/basic/pagination'))
+const BreadcrumbPage = React.lazy(() => import('@/pages/components/basic/breadcrumb'))
+const StepsPage = React.lazy(() => import('@/pages/components/basic/steps'))
+const CollapsePage = React.lazy(() => import('@/pages/components/basic/collapse'))
+const DividerPage = React.lazy(() => import('@/pages/components/basic/divider'))
+const TagPage = React.lazy(() => import('@/pages/components/basic/tag'))
+const TypographyPage = React.lazy(() => import('@/pages/components/basic/typography'))
+const IconPage = React.lazy(() => import('@/pages/components/basic/icon'))
+const ScrollAreaPage = React.lazy(() => import('@/pages/components/basic/scroll-area'))
+const WatermarkPage = React.lazy(() => import('@/pages/components/basic/watermark'))
+
+// ─── 业务组件占位页（步骤25替换） ───
+function lazyPlaceholder(name: string) {
   const P = () => (
     <div className="p-6">
       <h2 className="text-xl font-semibold">{name}</h2>
@@ -39,47 +71,9 @@ function placeholder(name: string): ComponentType {
     </div>
   )
   P.displayName = name
-  return P
-}
-
-function lazyPlaceholder(name: string) {
-  const P = placeholder(name)
   return React.lazy(() => Promise.resolve({ default: P }))
 }
 
-// 基础组件占位页
-const ButtonPage = lazyPlaceholder('Button 按钮')
-const InputPage = lazyPlaceholder('Input 输入框')
-const SelectPage = lazyPlaceholder('Select 选择器')
-const FormPage = lazyPlaceholder('Form 表单')
-const TablePage = lazyPlaceholder('Table 表格')
-const ModalPage = lazyPlaceholder('Modal 弹窗')
-const DrawerPage = lazyPlaceholder('Drawer 抽屉')
-const TabsPage = lazyPlaceholder('Tabs 标签页')
-const CardPage = lazyPlaceholder('Card 卡片')
-const BadgePage = lazyPlaceholder('Badge 徽标')
-const AvatarPage = lazyPlaceholder('Avatar 头像')
-const TooltipPage = lazyPlaceholder('Tooltip 文字提示')
-const PopoverPage = lazyPlaceholder('Popover 弹出框')
-const AlertPage = lazyPlaceholder('Alert 警告提示')
-const ToastPage = lazyPlaceholder('Toast 消息提示')
-const ProgressPage = lazyPlaceholder('Progress 进度条')
-const SkeletonPage = lazyPlaceholder('Skeleton 骨架屏')
-const EmptyPage = lazyPlaceholder('Empty 空状态')
-const ResultPage = lazyPlaceholder('Result 结果页')
-const SpinPage = lazyPlaceholder('Spin 加载中')
-const PaginationPage = lazyPlaceholder('Pagination 分页')
-const BreadcrumbPage = lazyPlaceholder('Breadcrumb 面包屑')
-const StepsPage = lazyPlaceholder('Steps 步骤条')
-const CollapsePage = lazyPlaceholder('Collapse 折叠面板')
-const DividerPage = lazyPlaceholder('Divider 分割线')
-const TagPage = lazyPlaceholder('Tag 标签')
-const TypographyPage = lazyPlaceholder('Typography 排版')
-const IconPage = lazyPlaceholder('Icon 图标')
-const ScrollAreaPage = lazyPlaceholder('ScrollArea 滚动区域')
-const WatermarkPage = lazyPlaceholder('Watermark 水印')
-
-// 业务组件占位页
 const DatePickerPage = lazyPlaceholder('DatePicker 日期选择')
 const TimePickerPage = lazyPlaceholder('TimePicker 时间选择')
 const DateRangePage = lazyPlaceholder('DateRange 日期范围')

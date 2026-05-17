@@ -1,77 +1,124 @@
-import { useState } from 'react'
+import { useRef } from 'react'
 import { z } from 'zod'
+import { toast } from '@/hooks/useToast'
 import { AppForm } from '@/components/base/AppForm'
 import { FormField } from '@/components/base/FormField'
 import { AppInput } from '@/components/base/AppInput'
-import { AppSelect } from '@/components/base/AppSelect'
-import { AppButton } from '@/components/base/AppButton'
-import { toast } from '@/hooks/useToast'
+import { ProForm } from '@/components/pro/ProForm'
+import { PageHeader, DemoSection, ComponentDemo, PropsTable } from '@/components/preview'
+import type { PropItem } from '@/components/preview'
+import type { ProFormRef } from '@/components/pro/ProForm'
+import type { ProFormSchema } from '@/types/schema'
 
-const schema = z.object({
-  name: z.string().min(2, '姓名至少 2 个字'),
-  email: z.string().email('请输入有效邮箱'),
-  role: z.string().min(1, '请选择角色'),
-  intro: z.string().max(100, '简介不超过 100 字').optional(),
+const loginSchema = z.object({
+  username: z.string().min(3, '用户名至少 3 位'),
+  password: z.string().min(6, '密码至少 6 位'),
 })
 
-const roleOptions = [
-  { label: '管理员', value: 'admin' },
-  { label: '编辑者', value: 'editor' },
-  { label: '观察者', value: 'viewer' },
+const cityOptions = [
+  { label: '北京', value: 'beijing' },
+  { label: '上海', value: 'shanghai' },
+  { label: '广州', value: 'guangzhou' },
+]
+
+const proSchema: ProFormSchema = {
+  columns: 2,
+  fields: [
+    { field: 'name', label: '姓名', type: 'input', required: true, span: 12, rules: { minLength: 2 } },
+    { field: 'age', label: '年龄', type: 'number', span: 12, rules: { min: 1, max: 120 } },
+    { field: 'email', label: '邮箱', type: 'input', span: 24, rules: { email: true } },
+    { field: 'city', label: '城市', type: 'select', span: 12, options: cityOptions },
+    { field: 'bio', label: '简介', type: 'textarea', span: 24 },
+    { field: 'notify', label: '接收通知', type: 'switch', span: 12 },
+    { field: 'score', label: '满意度', type: 'rate', span: 12 },
+  ],
+  submitText: '提交注册',
+}
+
+const PROPS: PropItem[] = [
+  { name: 'schema', type: 'z.ZodType', required: true, description: '(AppForm) Zod 校验 schema' },
+  { name: 'onSubmit', type: '(values) => void', required: true, description: '提交回调' },
+  { name: 'layout', type: "'vertical'|'horizontal'", default: "'vertical'", description: 'ProForm 布局方向' },
+  { name: 'columns', type: 'number', default: '1', description: 'ProForm 列数（24栅格分列）' },
+  { name: 'fields', type: 'FormField[]', description: 'ProForm 平铺字段配置' },
+  { name: 'groups', type: 'FormGroup[]', description: 'ProForm 分组字段配置' },
+  { name: 'formRef', type: 'RefObject<ProFormRef>', description: 'ProForm 命令式引用' },
 ]
 
 export default function FormPage() {
-  const [result, setResult] = useState<string>('')
+  const proRef = useRef<ProFormRef | null>(null)
 
   return (
-    <div className="p-6 space-y-8 max-w-2xl">
-      <div>
-        <h1 className="text-2xl font-semibold">Form 表单</h1>
-        <p className="mt-1 text-muted-foreground text-sm">AppForm 基于 react-hook-form + zod，支持垂直/水平布局、异步提交。</p>
-      </div>
+    <div className="p-6 space-y-10 max-w-5xl">
+      <PageHeader
+        title="Form 表单"
+        description="数据录入与校验容器。AppForm 使用 react-hook-form + Zod；ProForm 传入 JSON Schema 自动渲染完整表单。"
+        tags={['react-hook-form', 'Zod', '基础组件']}
+      />
 
-      <section className="space-y-4">
-        <h2 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">垂直布局（默认）</h2>
-        <div className="border rounded-xl p-6">
-          <AppForm
-            schema={schema}
-            defaultValues={{ name: '', email: '', role: '' }}
-            onSubmit={async (v) => {
-              await new Promise((r) => setTimeout(r, 1000))
-              setResult(JSON.stringify(v, null, 2))
-              toast.success('提交成功')
-            }}
-          >
-            {(form) => (
-              <div className="space-y-4">
-                <FormField form={form} name="name" label="姓名" required>
-                  <AppInput placeholder="请输入姓名" />
-                </FormField>
-                <FormField form={form} name="email" label="邮箱" required>
-                  <AppInput placeholder="请输入邮箱" />
-                </FormField>
-                <FormField form={form} name="role" label="角色" required>
-                  <AppSelect options={roleOptions} placeholder="请选择角色" className="w-full" />
-                </FormField>
-                <FormField form={form} name="intro" label="简介">
-                  <AppInput placeholder="选填简介（最多 100 字）" maxLength={100} showCount />
-                </FormField>
-                <div className="flex gap-2 pt-2">
-                  <AppButton type="submit" loading={form.formState.isSubmitting}>
-                    提交
-                  </AppButton>
-                  <AppButton type="button" variant="outline" onClick={() => form.reset()}>
-                    重置
-                  </AppButton>
-                </div>
-              </div>
-            )}
-          </AppForm>
-        </div>
-        {result && (
-          <pre className="bg-muted rounded-lg p-4 text-xs overflow-auto">{result}</pre>
-        )}
-      </section>
+      <DemoSection title="AppForm — Zod 校验">
+        <ComponentDemo
+          title="基础登录表单"
+          code={`const schema = z.object({
+  username: z.string().min(3, '用户名至少 3 位'),
+  password: z.string().min(6, '密码至少 6 位'),
+})
+<AppForm schema={schema} onSubmit={handleSubmit}>
+  {({ control }) => (
+    <>
+      <FormField control={control} name="username" label="用户名" required>
+        <AppInput placeholder="请输入用户名" />
+      </FormField>
+      <FormField control={control} name="password" label="密码" required>
+        <AppInput type="password" placeholder="请输入密码" />
+      </FormField>
+    </>
+  )}
+</AppForm>`}
+        >
+          <div className="max-w-sm">
+            <AppForm schema={loginSchema} onSubmit={(v) => toast.success(`提交：${JSON.stringify(v)}`)}>
+              {({ control }) => (
+                <>
+                  <FormField control={control} name="username" label="用户名" required>
+                    <AppInput placeholder="用户名（至少 3 位）" />
+                  </FormField>
+                  <FormField control={control} name="password" label="密码" required>
+                    <AppInput type="password" placeholder="密码（至少 6 位）" />
+                  </FormField>
+                </>
+              )}
+            </AppForm>
+          </div>
+        </ComponentDemo>
+      </DemoSection>
+
+      <DemoSection title="ProForm — Schema 驱动">
+        <ComponentDemo
+          title="JSON Schema 渲染完整表单（含 8 种字段类型）"
+          code={`const schema: ProFormSchema = {
+  columns: 2,
+  fields: [
+    { field: 'name', label: '姓名', type: 'input', required: true, span: 12 },
+    { field: 'age', label: '年龄', type: 'number', span: 12 },
+    { field: 'email', label: '邮箱', type: 'input', rules: { email: true }, span: 24 },
+    { field: 'city', label: '城市', type: 'select', options: cityList, span: 12 },
+    { field: 'bio', label: '简介', type: 'textarea', span: 24 },
+    { field: 'notify', label: '接收通知', type: 'switch', span: 12 },
+    { field: 'score', label: '满意度', type: 'rate', span: 12 },
+  ],
+}
+<ProForm schema={schema} onSubmit={handleSubmit} formRef={proRef} />`}
+        >
+          <ProForm
+            schema={proSchema}
+            formRef={proRef}
+            onSubmit={(v) => toast.success(`提交成功！\n${JSON.stringify(v, null, 2)}`)}
+          />
+        </ComponentDemo>
+      </DemoSection>
+
+      <PropsTable data={PROPS} />
     </div>
   )
 }

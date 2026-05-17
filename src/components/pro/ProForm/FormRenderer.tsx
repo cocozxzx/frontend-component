@@ -1,8 +1,9 @@
 import { useState, useEffect, type ReactNode } from 'react'
-import { useFormContext, Controller, type Control } from 'react-hook-form'
+import { useFormContext, type Control } from 'react-hook-form'
 import { HelpCircle } from 'lucide-react'
 import { z } from 'zod'
 import {
+  FormField as ShadcnFormField,
   FormItem, FormLabel, FormControl, FormDescription, FormMessage,
 } from '@/components/ui/form'
 import { Textarea } from '@/components/ui/textarea'
@@ -466,7 +467,7 @@ export function FormRenderer({
       : field.disabled === true)
 
   return (
-    <Controller
+    <ShadcnFormField
       control={control}
       name={field.field}
       render={({ field: ff, fieldState }) => (

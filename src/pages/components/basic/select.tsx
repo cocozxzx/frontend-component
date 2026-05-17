@@ -1,90 +1,118 @@
-import { useState } from 'react'
+import { useMemo } from 'react'
 import {
-  Select, SelectContent, SelectItem,
-  SelectTrigger, SelectValue,
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from '@/components/ui/select'
-import { AppSelect, type SelectOption } from '@/components/base/AppSelect'
+import { AppSelect } from '@/components/base/AppSelect'
+import { VirtualSelect } from '@/components/advanced/VirtualSelect'
+import { PageHeader, DemoSection, ComponentDemo, PropsTable } from '@/components/preview'
+import type { PropItem } from '@/components/preview'
 
-const cities: SelectOption[] = [
+const BASIC_OPTIONS = [
   { label: '北京', value: 'beijing' },
   { label: '上海', value: 'shanghai' },
   { label: '广州', value: 'guangzhou' },
   { label: '深圳', value: 'shenzhen' },
   { label: '杭州', value: 'hangzhou' },
-  { label: '成都', value: 'chengdu' },
 ]
 
-const bigList: SelectOption[] = Array.from({ length: 200 }, (_, i) => ({
-  label: `选项 ${i + 1}`,
-  value: String(i + 1),
-}))
+const PROPS: PropItem[] = [
+  { name: 'value', type: 'string | number', description: '当前选中值' },
+  { name: 'onChange', type: '(value) => void', description: '选择回调' },
+  { name: 'options', type: 'SelectOption[]', description: '(AppSelect) 选项列表' },
+  { name: 'allowSearch', type: 'boolean', default: 'false', description: '(AppSelect) 本地搜索过滤' },
+  { name: 'remote', type: 'boolean', default: 'false', description: '(AppSelect) 远程搜索模式' },
+  { name: 'onSearch', type: '(kw) => Promise<Option[]>', description: '(AppSelect) 远程搜索函数' },
+  { name: 'virtual', type: 'boolean', default: 'auto', description: '(AppSelect) 强制虚拟滚动' },
+  { name: 'multiple', type: 'boolean', default: 'false', description: '(VirtualSelect) 多选模式' },
+]
+
+async function mockRemoteSearch(keyword: string) {
+  await new Promise((r) => setTimeout(r, 500))
+  return BASIC_OPTIONS.filter((o) => o.label.includes(keyword))
+}
 
 export default function SelectPage() {
-  const [city, setCity] = useState<string | number>('')
-
-  const remoteSearch = async (kw: string): Promise<SelectOption[]> => {
-    await new Promise((r) => setTimeout(r, 500))
-    return cities.filter((c) => c.label.includes(kw))
-  }
+  const bigOptions = useMemo(() =>
+    Array.from({ length: 10000 }, (_, i) => ({
+      label: `选项 ${i + 1}`,
+      value: i + 1,
+    })), [])
 
   return (
-    <div className="p-6 space-y-8 max-w-2xl">
-      <div>
-        <h1 className="text-2xl font-semibold">Select 选择器</h1>
-        <p className="mt-1 text-muted-foreground text-sm">AppSelect 支持搜索、虚拟滚动（≥100项）、远程搜索。</p>
-      </div>
+    <div className="p-6 space-y-10 max-w-5xl">
+      <PageHeader
+        title="Select 选择器"
+        description="下拉选择组件。AppSelect 封装了本地搜索、远程搜索、虚拟滚动；VirtualSelect 支持10万条数据流畅渲染和多选。"
+        tags={['shadcn/ui', '表单', '基础组件']}
+      />
 
-      <section className="space-y-3">
-        <h2 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">原生 shadcn Select</h2>
-        <Select>
-          <SelectTrigger className="w-52">
-            <SelectValue placeholder="请选择城市" />
-          </SelectTrigger>
-          <SelectContent>
-            {cities.map((c) => (
-              <SelectItem key={c.value} value={String(c.value)}>{c.label}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </section>
+      <DemoSection title="基础 shadcn Select">
+        <ComponentDemo
+          title="原生 Select 组件"
+          code={`<Select>
+  <SelectTrigger className="w-48">
+    <SelectValue placeholder="请选择城市" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="beijing">北京</SelectItem>
+    <SelectItem value="shanghai">上海</SelectItem>
+  </SelectContent>
+</Select>`}
+        >
+          <Select>
+            <SelectTrigger className="w-48">
+              <SelectValue placeholder="请选择城市" />
+            </SelectTrigger>
+            <SelectContent>
+              {BASIC_OPTIONS.map((o) => (
+                <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </ComponentDemo>
+      </DemoSection>
 
-      <section className="space-y-3">
-        <h2 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">AppSelect — 本地搜索</h2>
-        <AppSelect
-          options={cities}
-          value={city}
-          onChange={setCity}
-          allowSearch
-          placeholder="可搜索城市"
-          className="w-52"
-        />
-      </section>
+      <DemoSection title="AppSelect — 本地搜索">
+        <ComponentDemo
+          title="allowSearch=true 本地过滤"
+          code={`<AppSelect options={cities} allowSearch placeholder="搜索城市" />`}
+        >
+          <div className="max-w-xs">
+            <AppSelect options={BASIC_OPTIONS} allowSearch placeholder="搜索城市" onChange={() => {}} />
+          </div>
+        </ComponentDemo>
+      </DemoSection>
 
-      <section className="space-y-3">
-        <h2 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">AppSelect — 虚拟滚动（200项）</h2>
-        <AppSelect
-          options={bigList}
-          placeholder="从 200 个选项中选择"
-          className="w-52"
-          allowSearch
-        />
-      </section>
+      <DemoSection title="AppSelect — 远程搜索">
+        <ComponentDemo
+          title="remote=true + onSearch（模拟 500ms 延迟）"
+          code={`<AppSelect
+  remote
+  onSearch={async (kw) => fetchCities(kw)}
+  placeholder="输入关键词搜索"
+/>`}
+        >
+          <div className="max-w-xs">
+            <AppSelect remote onSearch={mockRemoteSearch} placeholder="输入关键词搜索" onChange={() => {}} />
+          </div>
+        </ComponentDemo>
+      </DemoSection>
 
-      <section className="space-y-3">
-        <h2 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">AppSelect — 远程搜索</h2>
-        <AppSelect
-          remote
-          onSearch={remoteSearch}
-          placeholder="输入城市名搜索"
-          className="w-52"
-        />
-        <p className="text-xs text-muted-foreground">模拟 500ms 延迟的远程接口</p>
-      </section>
+      <DemoSection title="VirtualSelect — 万级数据">
+        <ComponentDemo
+          title="10000 条数据虚拟滚动（单选 / 多选）"
+          code={`// 10000 条数据，流畅滚动
+<VirtualSelect options={bigOptions} searchable placeholder="单选" />
+<VirtualSelect options={bigOptions} multiple placeholder="多选" />`}
+        >
+          <div className="grid grid-cols-2 gap-4 max-w-xl">
+            <VirtualSelect options={bigOptions} searchable placeholder="单选（10000 条）" />
+            <VirtualSelect options={bigOptions} multiple searchable placeholder="多选（10000 条）" />
+          </div>
+        </ComponentDemo>
+      </DemoSection>
 
-      <section className="space-y-3">
-        <h2 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">禁用状态</h2>
-        <AppSelect options={cities} disabled placeholder="禁用状态" className="w-52" />
-      </section>
+      <PropsTable data={PROPS} />
     </div>
   )
 }
