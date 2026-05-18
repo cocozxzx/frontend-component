@@ -60,9 +60,11 @@ function HeatMapLayer({ points, radius, opacity, gradient, blur }: HeatMapLayerP
           data: latestPointsRef.current.map((p) => ({
             lng: p.lng,
             lat: p.lat,
-            count: p.weight ?? 1,
+            count: Math.round((p.weight ?? 1) * 100),
           })),
+          max: 100,
         })
+        hm.show()
         heatmapRef.current = hm
       })
       .catch(() => {/* plugin load failure is non-critical */})
@@ -80,7 +82,8 @@ function HeatMapLayer({ points, radius, opacity, gradient, blur }: HeatMapLayerP
   useEffect(() => {
     if (!heatmapRef.current) return
     heatmapRef.current.setDataSet({
-      data: points.map((p) => ({ lng: p.lng, lat: p.lat, count: p.weight ?? 1 })),
+      data: points.map((p) => ({ lng: p.lng, lat: p.lat, count: Math.round((p.weight ?? 1) * 100) })),
+      max: 100,
     })
   }, [points])
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, type ReactNode } from 'react'
+import { useState, useEffect, useCallback, createContext, useContext, type ReactNode } from 'react'
 import { throttle } from '@/lib/utils'
 import { cn } from '@/lib/utils'
 
@@ -10,22 +10,37 @@ export interface AnchorLinkConfig {
   children?: AnchorLinkConfig[]
 }
 
-// ─── AnchorLink (child component) ────────────────────────────────────────────
+// ─── Context ──────────────────────────────────────────────────────────────────
 
-export interface AnchorLinkProps extends AnchorLinkConfig {
+interface AnchorCtxValue {
   activeHref: string
   onClick: (href: string) => void
+}
+
+const AnchorCtx = createContext<AnchorCtxValue | null>(null)
+
+// ─── AnchorLink (child component) ────────────────────────────────────────────
+
+export interface AnchorLinkProps {
+  href: string
+  title: ReactNode
+  children?: ReactNode
+  activeHref?: string
+  onClick?: (href: string) => void
   depth?: number
 }
 
-export function AnchorLink({ href, title, children, activeHref, onClick, depth = 0 }: AnchorLinkProps) {
+export function AnchorLink({ href, title, children, activeHref: propActiveHref, onClick: propOnClick, depth = 0 }: AnchorLinkProps) {
+  const ctx = useContext(AnchorCtx)
+  const activeHref = propActiveHref ?? ctx?.activeHref ?? ''
+  const handleClick = propOnClick ?? ctx?.onClick ?? (() => {})
   const isActive = activeHref === href
 
   return (
     <div>
       <button
         type="button"
-        onClick={() => onClick(href)}
+        onClick={() => handleClick(href)}
         className={cn(
           'flex w-full border-l-[3px] px-3 py-1 text-left text-sm transition-colors',
           isActive
@@ -36,15 +51,7 @@ export function AnchorLink({ href, title, children, activeHref, onClick, depth =
       >
         {title}
       </button>
-      {children?.map((child) => (
-        <AnchorLink
-          key={child.href}
-          {...child}
-          activeHref={activeHref}
-          onClick={onClick}
-          depth={depth + 1}
-        />
-      ))}
+      {children && <div>{children}</div>}
     </div>
   )
 }
@@ -64,6 +71,23 @@ export interface AnchorProps {
 
 function flattenItems(items: AnchorLinkConfig[]): AnchorLinkConfig[] {
   return items.flatMap((item) => [item, ...(item.children ? flattenItems(item.children) : [])])
+}
+
+function renderConfigItems(items: AnchorLinkConfig[], activeHref: string, onClick: (href: string) => void, depth = 0): ReactNode {
+  return items.map((item) => (
+    <AnchorLink
+      key={item.href}
+      href={item.href}
+      title={item.title}
+      activeHref={activeHref}
+      onClick={onClick}
+      depth={depth}
+    >
+      {item.children?.length
+        ? renderConfigItems(item.children, activeHref, onClick, depth + 1)
+        : null}
+    </AnchorLink>
+  ))
 }
 
 export function Anchor({
@@ -119,26 +143,19 @@ export function Anchor({
     onChange?.(href)
   }
 
-  const nav = (
-    <nav
-      className={cn(
-        'w-40 border-l border-border py-2',
-        affix && 'sticky',
-        className,
-      )}
-      style={affix ? { top: offsetTop } : undefined}
-    >
-      {items.map((item) => (
-        <AnchorLink
-          key={item.href}
-          {...item}
-          activeHref={activeHref}
-          onClick={handleClick}
-        />
-      ))}
-      {children}
-    </nav>
+  return (
+    <AnchorCtx.Provider value={{ activeHref, onClick: handleClick }}>
+      <nav
+        className={cn(
+          'w-40 border-l border-border py-2',
+          affix && 'sticky',
+          className,
+        )}
+        style={affix ? { top: offsetTop } : undefined}
+      >
+        {renderConfigItems(items, activeHref, handleClick)}
+        {children}
+      </nav>
+    </AnchorCtx.Provider>
   )
-
-  return nav
 }

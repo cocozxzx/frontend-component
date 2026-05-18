@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Settings2, PinLeft, PinRight, PinOff } from 'lucide-react'
+import { Settings2, ArrowLeftToLine, ArrowRightToLine, PinOff } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -104,7 +104,7 @@ export function ColumnSetting({
                     : 'text-muted-foreground hover:text-foreground'
                 }
               >
-                <PinLeft size={13} />
+                <ArrowLeftToLine size={13} />
               </button>
               <button
                 type="button"
@@ -116,7 +116,7 @@ export function ColumnSetting({
                     : 'text-muted-foreground hover:text-foreground'
                 }
               >
-                <PinRight size={13} />
+                <ArrowRightToLine size={13} />
               </button>
               {pinning[col.key] && (
                 <button

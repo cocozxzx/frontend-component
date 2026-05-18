@@ -1,7 +1,7 @@
 import { useReducer, useEffect, useCallback, createContext, useContext, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import {
-  ZoomIn, ZoomOut, RotateCounterClockwise, RotateCw,
+  ZoomIn, ZoomOut, RotateCcw, RotateCw,
   Download, X, ChevronLeft, ChevronRight,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -178,7 +178,7 @@ export function ImagePreview({ visible, onClose, src, images, currentIndex = 0, 
         {[
           { icon: ZoomIn, label: '放大', action: () => dispatch({ type: 'ZOOM_IN' }) },
           { icon: ZoomOut, label: '缩小', action: () => dispatch({ type: 'ZOOM_OUT' }) },
-          { icon: RotateCounterClockwise, label: '左旋转', action: () => dispatch({ type: 'ROTATE_LEFT' }) },
+          { icon: RotateCcw, label: '左旋转', action: () => dispatch({ type: 'ROTATE_LEFT' }) },
           { icon: RotateCw, label: '右旋转', action: () => dispatch({ type: 'ROTATE_RIGHT' }) },
           { icon: Download, label: '下载', action: handleDownload },
         ].map(({ icon: Icon, label, action }) => (

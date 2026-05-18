@@ -62,11 +62,16 @@ export function LineChart({
     }),
   }))
 
+  const showLegend = legend && yFields.length > 1
+  const topOffset = title && showLegend ? 72 : title ? 46 : showLegend ? 40 : 10
+
   const option: EChartsOption = {
-    ...(title && { title: { text: title } }),
+    ...(title && { title: { text: title, top: 5 } }),
     ...(tooltip && { tooltip: { trigger: 'axis', ...(tooltipFormatter && { formatter: tooltipFormatter }) } }),
-    ...(legend && yFields.length > 1 && { legend: { data: seriesNames ?? yFields } }),
-    grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true, ...grid },
+    legend: showLegend
+      ? { data: seriesNames ?? yFields, top: title ? 30 : 6 }
+      : { show: false },
+    grid: { top: topOffset, left: '3%', right: '4%', bottom: '3%', containLabel: true, ...grid },
     xAxis: { type: 'category', data: xData, boundaryGap: false },
     yAxis: {
       type: 'value',

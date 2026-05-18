@@ -69,7 +69,7 @@ export default function DragPage() {
         >
           <DragList
             items={list}
-            onChange={setList}
+            onReorder={setList}
             renderItem={(item) => (
               <div className="flex items-center gap-3 px-4 py-3 bg-card border rounded-lg">
                 <div className="flex-1">
@@ -89,7 +89,7 @@ export default function DragPage() {
         >
           <DragList
             items={listHandle}
-            onChange={setListHandle}
+            onReorder={setListHandle}
             handle
             renderItem={(item) => (
               <div className="flex items-center gap-3 px-4 py-3 bg-card border rounded-lg">
@@ -115,7 +115,7 @@ export default function DragPage() {
         >
           <DragGrid
             items={grid}
-            onChange={setGrid}
+            onReorder={setGrid}
             columns={3}
             gap={12}
             renderItem={(item) => (

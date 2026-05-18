@@ -6,9 +6,9 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 export interface DisabledTime {
-  disabledHours?: number[]
-  disabledMinutes?: number[]
-  disabledSeconds?: number[]
+  disabledHours?: number[] | (() => number[])
+  disabledMinutes?: number[] | (() => number[])
+  disabledSeconds?: number[] | (() => number[])
 }
 
 export interface TimePickerProps {
@@ -106,6 +106,9 @@ export function TimePicker({
   const showSeconds = format.includes('ss')
   const dis = disabledTime?.() ?? {}
 
+  const resolveDisabled = (v: number[] | (() => number[]) | undefined): number[] =>
+    typeof v === 'function' ? v() : (v ?? [])
+
   const hours = use12Hours ? generateRange(12, hourStep).map((v) => v || 12) : generateRange(24, hourStep)
   const minutes = generateRange(60, minuteStep)
   const seconds = generateRange(60, secondStep)
@@ -151,14 +154,14 @@ export function TimePicker({
           <TimeColumn
             items={hours}
             selected={h}
-            disabled={dis.disabledHours ?? []}
+            disabled={resolveDisabled(dis.disabledHours)}
             onSelect={(v) => emit(v, m, s)}
             label="时"
           />
           <TimeColumn
             items={minutes}
             selected={m}
-            disabled={dis.disabledMinutes ?? []}
+            disabled={resolveDisabled(dis.disabledMinutes)}
             onSelect={(v) => emit(h, v, s)}
             label="分"
           />
@@ -166,7 +169,7 @@ export function TimePicker({
             <TimeColumn
               items={seconds}
               selected={s}
-              disabled={dis.disabledSeconds ?? []}
+              disabled={resolveDisabled(dis.disabledSeconds)}
               onSelect={(v) => emit(h, m, v)}
               label="秒"
             />

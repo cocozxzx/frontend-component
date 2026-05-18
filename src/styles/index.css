@@ -225,3 +225,8 @@ body {
 .flex-center { @apply flex items-center justify-center; }
 .ellipsis { @apply overflow-hidden whitespace-nowrap text-ellipsis; }
 .absolute-center { @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2; }
+
+/* 日期选择器 — 日期格子间距（flex 行用 gap，覆盖 Tailwind 类） */
+[data-slot="calendar"] tr { gap: 4px; }
+[data-slot="calendar"] tr > td,
+[data-slot="calendar"] tr > th { min-width: 0; }

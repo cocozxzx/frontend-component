@@ -5,6 +5,12 @@ export const DEFAULT_ZOOM = 12
 // Singleton promise — prevents duplicate script injection across multiple map components
 let loadPromise: Promise<typeof AMap> | null = null
 
+// Set security config as early as possible (module load time)
+const _secCode = import.meta.env.VITE_AMAP_SECURITY_CODE
+if (_secCode) {
+  ;(window as unknown as Record<string, unknown>)._AMapSecurityConfig = { securityJsCode: _secCode }
+}
+
 export function loadAMap(key: string, plugins: string[] = []): Promise<typeof AMap> {
   if (window.AMap) {
     if (plugins.length) {
