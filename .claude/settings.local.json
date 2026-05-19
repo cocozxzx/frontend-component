@@ -43,7 +43,8 @@
       "Bash(node *)",
       "Bash(netstat -ano)",
       "Bash(findstr \":9527\")",
-      "Bash(grep -E \"\\\\.\\(tsx|ts\\)$\")"
+      "Bash(grep -E \"\\\\.\\(tsx|ts\\)$\")",
+      "Bash(Test-Path *)"
     ]
   }
 }
