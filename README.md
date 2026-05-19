@@ -42,8 +42,8 @@
 
 ```bash
 # 1. 克隆项目
-git clone https://github.com/your-org/react-admin-scaffold.git
-cd react-admin-scaffold
+git clone https://github.com/cocozxzx/frontend-component.git
+cd frontend-component
 
 # 2. 安装依赖
 npm install
