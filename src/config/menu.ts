@@ -12,6 +12,7 @@ export const menuConfig: MenuItem[] = [
     key: 'components',
     label: '组件库',
     icon: 'Puzzle',
+    path: '/components/basic/button',
     children: [
       {
         key: 'basic',
