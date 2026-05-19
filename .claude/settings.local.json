@@ -42,7 +42,8 @@
       "Bash(node -e \"const lucide = require\\('./node_modules/lucide-react'\\); console.log\\(Object.keys\\(lucide\\).filter\\(k => k.toLowerCase\\(\\).includes\\('pin'\\) || k.toLowerCase\\(\\).includes\\('left'\\) && k.toLowerCase\\(\\).includes\\('line'\\)\\)\\)\")",
       "Bash(node *)",
       "Bash(netstat -ano)",
-      "Bash(findstr \":9527\")"
+      "Bash(findstr \":9527\")",
+      "Bash(grep -E \"\\\\.\\(tsx|ts\\)$\")"
     ]
   }
 }
