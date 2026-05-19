@@ -15,7 +15,7 @@ const PROPS: PropItem[] = [
 
 export default function BadgePage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Badge 徽标"
         description="数字或状态标记。shadcn Badge 用于文字标签；AppBadge 用于包裹图标/按钮，支持数字、红点和状态模式。"

@@ -85,7 +85,7 @@ export default function ProFormPage() {
   const groupFormRef = useRef<ProFormRef>(null)
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="ProForm 高级表单"
         description="JSON Schema 驱动，22 种字段类型，支持条件显示/禁用、分组（可折叠）、表单联动。"

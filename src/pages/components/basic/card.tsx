@@ -21,7 +21,7 @@ const PROPS: PropItem[] = [
 
 export default function CardPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Card 卡片"
         description="通用内容容器。shadcn Card 提供 Header/Content/Footer 三个区域；StatCard 是专用于数据展示的数值卡片。"

@@ -28,7 +28,7 @@ export default function WatermarkPage() {
   }
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Watermark 水印"
         description="在内容区域添加水印防止截图传播。使用 Canvas 绘制，MutationObserver 防止 DOM 篡改。"

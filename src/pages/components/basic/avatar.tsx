@@ -16,7 +16,7 @@ const AVATARS = [
 
 export default function AvatarPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Avatar 头像"
         description="用户头像展示组件。支持图片加载失败时的文字 Fallback，可通过 className 控制尺寸。"

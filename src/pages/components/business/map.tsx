@@ -63,7 +63,7 @@ function KeyWarning() {
 
 export default function MapPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Map 地图"
         description="基于高德地图 JS API v2.0，支持标记点、点聚合、热力图，动态加载 SDK。"

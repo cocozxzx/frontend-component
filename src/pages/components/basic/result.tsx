@@ -30,7 +30,7 @@ const STATUS_TITLES: Record<string, string> = {
 
 export default function ResultPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Result 结果页"
         description="操作结果反馈页面，支持 success / error / warning / info 和 403 / 404 / 500 七种状态类型。"

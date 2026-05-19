@@ -28,7 +28,7 @@ export default function TagPage() {
   }
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Tag 标签"
         description="用于标记和分类的内联标签，支持六种颜色变体、两种尺寸和可关闭模式。"

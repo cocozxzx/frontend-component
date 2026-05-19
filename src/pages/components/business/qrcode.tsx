@@ -28,7 +28,7 @@ export default function QRCodePage() {
   }
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="QRCode 二维码"
         description="基于 qrcode 库，Canvas 渲染，支持自定义颜色、中心 Logo、过期状态、一键下载。"

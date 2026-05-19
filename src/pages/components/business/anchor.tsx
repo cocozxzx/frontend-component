@@ -34,7 +34,7 @@ function ContentSection({ id, title, color }: { id: string; title: string; color
 
 export default function AnchorPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Anchor 锚点"
         description="页面内锚点导航，支持自动跟随滚动激活、affix 固定定位、嵌套锚点层级。"

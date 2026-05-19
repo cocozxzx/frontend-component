@@ -35,7 +35,7 @@ const marketData = [
 
 export default function PieChartPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="PieChart 饼图"
         description="基于 ECharts 封装，支持普通饼图、环形图、南丁格尔玫瑰图、环形图中心文字。"

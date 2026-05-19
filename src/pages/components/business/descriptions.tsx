@@ -23,7 +23,7 @@ const ITEM_PROPS: PropItem[] = [
 
 export default function DescriptionsPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Descriptions 描述列表"
         description="常用于详情页信息展示，支持 bordered 边框、垂直布局、响应式列数、跨列。"

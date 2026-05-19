@@ -33,7 +33,7 @@ export default function StatCardPage() {
   }
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="StatCard 统计卡片"
         description="仪表盘核心指标卡，支持趋势箭头、迷你折线/柱状图、图标、countUp 动画。"

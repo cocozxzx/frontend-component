@@ -17,7 +17,7 @@ const PROPS: PropItem[] = [
 
 export default function TypographyPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Typography 排版"
         description="文字样式规范组件，提供一致的文字层级和视觉样式，基于 Tailwind CSS 的字体规范构建。"

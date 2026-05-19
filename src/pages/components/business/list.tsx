@@ -61,7 +61,7 @@ export default function ListPage() {
   }
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="List 列表"
         description="通用列表组件，支持头像、操作按钮、虚拟滚动（10000条）、分页、加载更多。"

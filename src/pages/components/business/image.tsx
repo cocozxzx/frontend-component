@@ -26,7 +26,7 @@ const IMAGES = [
 
 export default function ImagePage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Image 图片"
         description="懒加载、点击预览（缩放/旋转/拖拽/下载）、加载失败占位、ImageGroup 多图切换。"

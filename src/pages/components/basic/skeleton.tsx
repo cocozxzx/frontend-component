@@ -8,7 +8,7 @@ const PROPS: PropItem[] = [
 
 export default function SkeletonPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Skeleton 骨架屏"
         description="内容加载时的占位效果，用于提升用户感知性能。通过 className 控制尺寸和形状。"

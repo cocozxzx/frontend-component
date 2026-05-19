@@ -48,7 +48,7 @@ const competitorData = [
 
 export default function RadarChartPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="RadarChart 雷达图"
         description="基于 ECharts 封装，支持多边形/圆形外框、多系列对比、面积填充，适合多维度评估。"

@@ -26,7 +26,7 @@ const deploySteps = [
 
 export default function TimelinePage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Timeline 时间轴"
         description="支持 left / alternate 对齐模式，自定义节点颜色和图标，pending 进行中状态。"

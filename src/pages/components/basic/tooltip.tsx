@@ -14,7 +14,7 @@ const PROPS: PropItem[] = [
 
 export default function TooltipPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Tooltip 文字提示"
         description="鼠标悬浮时显示的文字提示气泡，基于 Radix UI Tooltip，支持四个方向和延迟显示。"

@@ -12,7 +12,7 @@ const PROPS: PropItem[] = [
 
 export default function DividerPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Divider 分割线"
         description="用于内容区域的分隔。Divider 支持带文字的分割线；shadcn Separator 适合简单分隔。"

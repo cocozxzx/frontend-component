@@ -54,7 +54,7 @@ export default function DateRangePage() {
   ]
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="DateRange 日期范围选择"
         description="双月视图日期范围选择器，支持快捷选项、禁用日期区间。"

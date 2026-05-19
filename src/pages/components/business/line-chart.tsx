@@ -30,7 +30,7 @@ const monthData = [
 
 export default function LineChartPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="LineChart 折线图"
         description="基于 ECharts 封装，支持单/多系列、平滑曲线、面积填充、数据标签，自适应主题色。"

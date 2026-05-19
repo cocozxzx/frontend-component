@@ -10,7 +10,7 @@ const PROPS: PropItem[] = [
 
 export default function AlertPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Alert 警告提示"
         description="页内非打扰式提示信息。shadcn Alert 提供 default 和 destructive 两种变体，可通过 className 扩展颜色。"

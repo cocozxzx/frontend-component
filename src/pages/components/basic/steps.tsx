@@ -23,7 +23,7 @@ export default function StepsPage() {
   const [current, setCurrent] = useState(1)
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Steps 步骤条"
         description="引导用户按步骤完成任务。支持水平/垂直方向，可点击已完成步骤切换。"

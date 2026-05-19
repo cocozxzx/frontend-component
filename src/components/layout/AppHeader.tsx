@@ -93,7 +93,7 @@ export function AppHeader({ onMobileMenuToggle }: AppHeaderProps) {
     <>
       <header
         className={cn(
-          'flex h-14 shrink-0 items-center border-b border-border bg-card px-4 z-50',
+          'flex h-14 shrink-0 items-center border-b border-border/60 bg-card/95 px-4 z-50 backdrop-blur-sm',
           fixedHeader && 'sticky top-0',
         )}
       >

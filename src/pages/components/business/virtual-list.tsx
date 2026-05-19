@@ -56,7 +56,7 @@ export default function VirtualListPage() {
   }, [loading])
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="VirtualList 虚拟列表"
         description="基于 @tanstack/react-virtual，支持固定/动态行高，10000+ 条数据流畅滚动。"

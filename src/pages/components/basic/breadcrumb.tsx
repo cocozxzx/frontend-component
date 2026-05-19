@@ -16,7 +16,7 @@ const PROPS: PropItem[] = [
 
 export default function BreadcrumbPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Breadcrumb 面包屑"
         description="显示当前页面在层级结构中的位置。shadcn Breadcrumb 提供基础组件；AppBreadcrumb 自动根据当前路由生成。"

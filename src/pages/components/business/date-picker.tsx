@@ -31,7 +31,7 @@ export default function DatePickerPage() {
   ]
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="DatePicker 日期选择器"
         description="基于 react-day-picker 封装，支持快捷选项、时间选择、禁用日期等功能。"

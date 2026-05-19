@@ -10,7 +10,7 @@ const PROPS: PropItem[] = [
 
 export default function ProgressPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Progress 进度条"
         description="展示任务当前进度的线形进度条，基于 Radix UI Progress。"

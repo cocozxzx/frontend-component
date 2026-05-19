@@ -31,7 +31,7 @@ const uvPvData = [
 
 export default function AreaChartPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="AreaChart 面积图"
         description="基于 ECharts 封装，支持单/多系列面积图、堆叠面积图，自带渐变填充效果。"

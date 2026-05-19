@@ -24,7 +24,7 @@ export default function TimePickerPage() {
   const [disabled, setDisabled] = useState('')
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="TimePicker 时间选择器"
         description="三列滚动选择器，支持 12/24 小时制、步进配置、禁用时间段。"

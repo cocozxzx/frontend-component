@@ -15,7 +15,7 @@ const PROPS: PropItem[] = [
 
 export default function PopoverPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Popover & HoverCard"
         description="气泡卡片组件。Popover 点击触发可包含任意内容；HoverCard 鼠标悬浮触发，适合用户信息预览。"

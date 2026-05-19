@@ -48,7 +48,7 @@ export default function TablePage() {
   }
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Table 表格"
         description="展示结构化数据。shadcn Table 提供基础样式；AppTable 封装了排序、行选择、列显隐、loading 等高频功能。"

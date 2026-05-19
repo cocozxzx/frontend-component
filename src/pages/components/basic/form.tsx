@@ -49,7 +49,7 @@ export default function FormPage() {
   const proRef = useRef<ProFormRef | null>(null)
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Form 表单"
         description="数据录入与校验容器。AppForm 使用 react-hook-form + Zod；ProForm 传入 JSON Schema 自动渲染完整表单。"

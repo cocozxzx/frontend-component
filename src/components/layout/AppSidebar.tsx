@@ -49,21 +49,37 @@ function SidebarMenuItem({
       onClick={handleClick}
       style={{ paddingLeft }}
       className={cn(
-        'flex w-full items-center gap-2.5 border-l-[3px] py-2 text-sm transition-colors',
-        collapsed ? 'justify-center px-2' : 'pr-3',
+        'group relative flex w-full items-center gap-2.5 rounded-lg py-2 text-[13px] transition-all duration-150',
+        collapsed ? 'justify-center px-2 mx-0' : 'pr-3 mx-1',
         active
-          ? 'border-l-sidebar-accent bg-sidebar-accent/15 font-medium text-sidebar-accent'
-          : 'border-l-transparent text-sidebar-foreground hover:bg-white/[0.08]',
+          ? 'font-medium text-sidebar-accent-foreground'
+          : 'text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-white/[0.06]',
       )}
+      style={active ? {
+        background: 'linear-gradient(90deg, hsl(var(--sidebar-accent) / 0.22) 0%, hsl(var(--sidebar-accent) / 0.08) 100%)',
+      } : undefined}
     >
-      {item.icon && <DynamicIcon name={item.icon} size={16} className="shrink-0" />}
+      {/* Active indicator stripe */}
+      {active && !collapsed && (
+        <span
+          className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-r-full"
+          style={{ background: 'hsl(var(--sidebar-accent))' }}
+        />
+      )}
+      {item.icon && (
+        <DynamicIcon
+          name={item.icon}
+          size={15}
+          className={cn('shrink-0 transition-colors', active ? 'text-sidebar-accent' : 'text-sidebar-foreground/50 group-hover:text-sidebar-foreground/80')}
+        />
+      )}
       {!collapsed && (
         <>
           <span className="flex-1 truncate text-left">{item.label}</span>
           {hasChildren && (
             <ChevronDown
-              size={13}
-              className={cn('shrink-0 transition-transform duration-200', isExpanded && 'rotate-180')}
+              size={12}
+              className={cn('shrink-0 text-sidebar-foreground/40 transition-transform duration-200', isExpanded && 'rotate-180')}
             />
           )}
         </>
@@ -146,7 +162,7 @@ function SidebarBody({ collapsed, items }: SidebarBodyProps) {
     <TooltipProvider delayDuration={200}>
       <div className="flex h-full flex-col" style={{ backgroundColor: 'hsl(var(--sidebar))' }}>
         {/* Menu */}
-        <ScrollArea className="flex-1 px-2 py-2">
+        <ScrollArea className="flex-1 py-3 px-2">
           <div className="space-y-0.5">
             {items.map((item) => (
               <SidebarMenuItem
@@ -163,12 +179,12 @@ function SidebarBody({ collapsed, items }: SidebarBodyProps) {
         </ScrollArea>
 
         {/* Collapse toggle */}
-        <div className="border-t border-sidebar-border p-2">
+        <div className="border-t border-sidebar-border/60 p-2">
           <button
-            onClick={() => !collapsed && toggleSidebar() || collapsed && toggleSidebar()}
-            className="flex w-full items-center justify-center rounded py-2 text-sidebar-foreground/60 transition-colors hover:bg-white/[0.08] hover:text-sidebar-foreground"
+            onClick={() => toggleSidebar()}
+            className="flex w-full items-center justify-center rounded-lg py-2 text-sidebar-foreground/40 transition-all hover:bg-white/[0.06] hover:text-sidebar-foreground/70"
           >
-            {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+            {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
           </button>
         </div>
       </div>

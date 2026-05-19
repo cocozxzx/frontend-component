@@ -36,7 +36,7 @@ const deptData = [
 
 export default function BarChartPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="BarChart 柱状图"
         description="基于 ECharts 封装，支持分组、堆叠、横向、带背景柱，自适应主题色。"

@@ -22,7 +22,7 @@ export default function SpinPage() {
   }
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Spin 加载中"
         description="加载状态指示器。可独立使用或包裹内容，支持全屏遮罩模式。"

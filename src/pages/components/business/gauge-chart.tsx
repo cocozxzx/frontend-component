@@ -26,7 +26,7 @@ export default function GaugeChartPage() {
   const [dynamicValue, setDynamicValue] = useState(65)
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="GaugeChart 仪表盘"
         description="基于 ECharts 封装，支持自定义颜色阈值（三段色）、单位、动态数值。"

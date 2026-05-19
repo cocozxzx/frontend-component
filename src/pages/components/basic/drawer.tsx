@@ -31,7 +31,7 @@ export default function DrawerPage() {
   const [loadingOpen, setLoadingOpen] = useState(false)
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Drawer 抽屉"
         description="从边缘滑入的抽屉面板。AppDrawer 基于 shadcn Sheet 封装，支持四个方向、四种尺寸和异步确认。"

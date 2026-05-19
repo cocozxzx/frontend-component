@@ -25,7 +25,7 @@ export default function ButtonPage() {
   }
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Button 按钮"
         description="触发即时操作的基础交互组件。AppButton 在 shadcn Button 基础上增加了 loading、节流、权限控制能力。"

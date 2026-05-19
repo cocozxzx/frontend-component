@@ -54,7 +54,7 @@ export default function ModalPage() {
   }
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Modal 弹窗"
         description="对话框交互组件。shadcn Dialog 提供基础弹窗；AppModal 增加了宽度控制和异步 onConfirm；useModal 提供命令式 API。"

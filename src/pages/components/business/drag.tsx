@@ -51,7 +51,7 @@ export default function DragPage() {
   const [tags, setTags] = useState(['React', 'TypeScript', 'Tailwind'])
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Drag 拖拽排序"
         description="基于 @dnd-kit 封装，提供 DragList（垂直/水平排序）、DragGrid（网格排序）、TagsInput（可拖拽标签）。"

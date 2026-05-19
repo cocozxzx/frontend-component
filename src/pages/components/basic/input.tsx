@@ -19,7 +19,7 @@ const PROPS: PropItem[] = [
 
 export default function InputPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Input 输入框"
         description="单行文本输入框。AppInput 在 shadcn Input 基础上增加了前后缀、清除按钮、字数统计、loading 状态。"

@@ -24,7 +24,7 @@ export default function RichEditorPage() {
   const [limited, setLimited] = useState('')
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="RichEditor 富文本编辑器"
         description="基于 TipTap v3 封装，支持完整工具栏、自定义工具栏、只读渲染、字数限制。"

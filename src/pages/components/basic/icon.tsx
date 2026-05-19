@@ -29,7 +29,7 @@ export default function IconPage() {
   }
 
   return (
-    <div className="p-6 space-y-6 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Icon 图标"
         description={`基于 lucide-react，共 ${ALL_ICONS.length} 个图标。搜索并点击图标复制组件代码。`}

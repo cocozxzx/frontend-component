@@ -18,7 +18,7 @@ export default function PaginationPage() {
   const [size, setSize] = useState(10)
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Pagination 分页"
         description="数据分页控件，支持页码导航、每页条数切换、快速跳转。AppPagination 基于 shadcn Pagination 封装。"

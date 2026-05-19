@@ -24,7 +24,7 @@ export default function RatePage() {
   const [colored, setColored] = useState(3)
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Rate 评分"
         description="支持半星、只读、自定义图标和颜色、tooltip 提示，可完全键盘操作。"

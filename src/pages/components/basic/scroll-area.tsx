@@ -13,7 +13,7 @@ const PROPS: PropItem[] = [
 
 export default function ScrollAreaPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="ScrollArea 滚动区域"
         description="提供自定义滚动条样式的容器，基于 Radix UI ScrollArea，兼容所有浏览器。"

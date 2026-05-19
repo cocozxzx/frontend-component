@@ -31,7 +31,7 @@ export default function StatisticPage() {
   }
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Statistic 统计数值"
         description="展示重要数值，支持 countUp 动画（默认开启）、趋势箭头、前后缀、loading 状态。"

@@ -26,7 +26,7 @@ const PRO_PROPS: PropItem[] = [
 
 export default function UploadPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Upload 文件上传"
         description="支持 text / picture / picture-card 三种模式，以及拖拽上传、多文件、ProUpload（可排序+裁剪）。"

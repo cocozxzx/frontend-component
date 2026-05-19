@@ -52,7 +52,7 @@ const VERTICAL_ITEMS: CarouselItem[] = TITLES.slice(0, 3).map((title, i) => ({
 
 export default function CarouselPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Carousel 轮播图"
         description="基于 embla-carousel-react，支持自动播放、多项显示、垂直模式、页面切换动效。"

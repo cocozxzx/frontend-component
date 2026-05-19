@@ -20,7 +20,7 @@ const PROPS: PropItem[] = [
 
 export default function ProUploadPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="ProUpload 高级上传"
         description="在 AppUpload 基础上增加拖拽排序、Canvas 图片裁剪（4角调整）、大图预览功能。"

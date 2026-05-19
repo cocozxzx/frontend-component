@@ -18,7 +18,7 @@ const PROPS: PropItem[] = [
 
 export default function CollapsePage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Collapse 折叠面板"
         description="将内容区域折叠/展开。基于 Radix UI Accordion，支持单选模式（手风琴）和多选模式。"

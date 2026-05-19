@@ -1,7 +1,5 @@
 import { cn } from '@/lib/utils'
 
-// ─── Types ─────────────────────────────────────────────────────────────────────
-
 export interface PropItem {
   name: string
   type: string
@@ -16,65 +14,78 @@ export interface PropsTableProps {
   className?: string
 }
 
-// ─── Component ─────────────────────────────────────────────────────────────────
-
 export function PropsTable({ data, title = 'Props', className }: PropsTableProps) {
   return (
-    <div className={cn('space-y-3', className)}>
-      {/* Title row */}
-      <div className="flex items-center gap-2">
-        <h3 className="text-[15px] font-semibold tracking-tight">{title}</h3>
-        <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
-          {data.length} 个属性
-        </span>
+    <div className={cn('space-y-4', className)}>
+      {/* API 区分隔 */}
+      <div className="flex items-center gap-4 pt-2">
+        <div className="flex items-center gap-2.5">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground/50">
+            API 参考
+          </span>
+          <span className="rounded-full bg-muted/80 px-2 py-0.5 text-[11px] font-medium tabular-nums text-muted-foreground/60">
+            {data.length} 个属性
+          </span>
+        </div>
+        <div className="h-px flex-1 bg-gradient-to-r from-border/60 to-transparent" />
       </div>
 
-      {/* Use a real <table> with table-layout:fixed so columns never overflow */}
-      <div className="overflow-hidden rounded-xl border border-border">
+      {/* Table card */}
+      <div
+        className="overflow-hidden rounded-2xl border border-border/60"
+        style={{ boxShadow: 'var(--shadow-card)' }}
+      >
         <table className="w-full table-fixed border-collapse text-sm">
           <colgroup>
-            <col style={{ width: '148px' }} />  {/* 属性名 */}
-            <col style={{ width: '22%' }} />     {/* 类型 */}
-            <col style={{ width: '18%' }} />     {/* 默认值 */}
-            <col style={{ width: '64px' }} />    {/* 必填 */}
-            <col />                              {/* 说明 — 剩余宽度 */}
+            <col style={{ width: '148px' }} />
+            <col style={{ width: '22%' }} />
+            <col style={{ width: '17%' }} />
+            <col style={{ width: '66px' }} />
+            <col />
           </colgroup>
 
           <thead>
-            <tr className="border-b border-border bg-muted/40">
-              {(['属性名', '类型', '默认值', '必填', '说明'] as const).map((h) => (
+            <tr className="border-b border-border/40 bg-muted/25">
+              {[
+                { label: '属性名', cls: '' },
+                { label: '类型', cls: '' },
+                { label: '默认值', cls: '' },
+                { label: '必填', cls: 'text-center' },
+                { label: '说明', cls: '' },
+              ].map(({ label, cls }) => (
                 <th
-                  key={h}
+                  key={label}
                   className={cn(
-                    'px-4 py-2.5 text-left text-[11px] font-semibold uppercase tracking-wider text-muted-foreground',
-                    h === '必填' && 'text-center',
+                    'px-4 py-2.5 text-left text-[10.5px] font-semibold uppercase tracking-widest text-muted-foreground/50',
+                    cls,
                   )}
                 >
-                  {h}
+                  {label}
                 </th>
               ))}
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-border">
+          <tbody>
             {data.map((item, i) => (
               <tr
                 key={item.name}
                 className={cn(
-                  'transition-colors hover:bg-primary/5',
-                  i % 2 === 0 ? 'bg-card' : 'bg-muted/20',
+                  'border-b border-border/25 transition-colors last:border-0',
+                  'hover:bg-primary/[0.025]',
+                  i % 2 !== 0 && 'bg-muted/[0.12]',
                 )}
               >
                 {/* 属性名 */}
                 <td className="px-4 py-3 align-top">
-                  <code className="inline-block max-w-full break-all rounded-md bg-primary/8 px-2 py-0.5 font-mono text-[12px] font-medium text-primary">
+                  <code className="inline-block max-w-full break-all rounded-md bg-primary/[0.08] px-2 py-0.5 font-mono text-[12px] font-semibold text-primary">
                     {item.name}
                   </code>
                 </td>
 
                 {/* 类型 */}
                 <td className="px-4 py-3 align-top">
-                  <code className="inline-block max-w-full break-all rounded-md bg-violet-50 px-2 py-0.5 font-mono text-[12px] leading-relaxed text-violet-600 dark:bg-violet-950/40 dark:text-violet-400">
+                  <code className="inline-block max-w-full break-all rounded-md bg-violet-500/[0.07] px-2 py-0.5 font-mono text-[11.5px] leading-relaxed text-violet-600 dark:text-violet-400">
                     {item.type}
                   </code>
                 </td>
@@ -82,11 +93,11 @@ export function PropsTable({ data, title = 'Props', className }: PropsTableProps
                 {/* 默认值 */}
                 <td className="px-4 py-3 align-top">
                   {item.default ? (
-                    <code className="inline-block max-w-full break-all rounded-md bg-amber-50 px-2 py-0.5 font-mono text-[12px] leading-relaxed text-amber-700 dark:bg-amber-950/30 dark:text-amber-400">
+                    <code className="inline-block max-w-full break-all rounded-md bg-amber-500/[0.07] px-2 py-0.5 font-mono text-[11.5px] leading-relaxed text-amber-600 dark:text-amber-400">
                       {item.default}
                     </code>
                   ) : (
-                    <span className="text-muted-foreground/40">—</span>
+                    <span className="select-none text-muted-foreground/25">—</span>
                   )}
                 </td>
 
@@ -97,7 +108,7 @@ export function PropsTable({ data, title = 'Props', className }: PropsTableProps
                       必填
                     </span>
                   ) : (
-                    <span className="text-muted-foreground/40">—</span>
+                    <span className="select-none text-muted-foreground/25">—</span>
                   )}
                 </td>
 

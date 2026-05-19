@@ -36,7 +36,7 @@ export default function HeatmapChartPage() {
   const customColorData = useMemo(() => generateYearData(currentYear, 100), [currentYear])
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="HeatmapChart 热力图"
         description="年度日历热力图，类似 GitHub 贡献图，支持自定义颜色范围，基于 ECharts 渲染。"

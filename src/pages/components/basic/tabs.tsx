@@ -12,7 +12,7 @@ const PROPS: PropItem[] = [
 
 export default function TabsPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Tabs 标签页"
         description="内容切换组件。基于 Radix UI Tabs，支持受控/非受控模式，可添加图标和禁用特定标签。"

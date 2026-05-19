@@ -12,7 +12,7 @@ const PROPS: PropItem[] = [
 
 export default function EmptyPage() {
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Empty 空状态"
         description="无数据时的展示占位，提供默认图标和说明文字，支持自定义图标和操作按钮。"

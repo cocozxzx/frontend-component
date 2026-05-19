@@ -21,7 +21,7 @@ export default function ToastPage() {
   }
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Toast 消息提示"
         description="全局轻量级消息反馈，基于 Sonner。useToast 封装了 success/error/warning/info/loading/promise 六种方法。"

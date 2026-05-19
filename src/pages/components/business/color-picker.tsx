@@ -25,7 +25,7 @@ export default function ColorPickerPage() {
   const [withPreset, setWithPreset] = useState('#52c41a')
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="ColorPicker 颜色选择器"
         description="HSB 色域面板，支持透明度、预设色板、HEX/RGB/HSL 多格式输入输出。"

@@ -88,7 +88,7 @@ export default function TreePage() {
   }
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Tree 树形组件"
         description="支持展开/折叠、复选框、异步懒加载、搜索过滤、连接线、拖拽排序，可开启虚拟滚动。"

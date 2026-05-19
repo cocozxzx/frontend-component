@@ -1,18 +1,27 @@
 import { Link } from 'react-router'
-import { ArrowRight } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { ROUTES } from '@/router/routes'
 
-// ─── Card color palette (fixed per index) ──────────────────────────────────────
+// ─── Icon mark colors per category ─────────────────────────────────────────────
 
-const COLORS = [
-  'bg-blue-500', 'bg-violet-500', 'bg-emerald-500', 'bg-orange-500',
-  'bg-rose-500', 'bg-cyan-500', 'bg-amber-500', 'bg-pink-500',
-  'bg-indigo-500', 'bg-teal-500', 'bg-red-500', 'bg-lime-500',
+const MARK_STYLES = [
+  { bg: 'bg-blue-500/10', text: 'text-blue-500', border: 'border-blue-500/20' },
+  { bg: 'bg-violet-500/10', text: 'text-violet-500', border: 'border-violet-500/20' },
+  { bg: 'bg-emerald-500/10', text: 'text-emerald-500', border: 'border-emerald-500/20' },
+  { bg: 'bg-orange-500/10', text: 'text-orange-500', border: 'border-orange-500/20' },
+  { bg: 'bg-rose-500/10', text: 'text-rose-500', border: 'border-rose-500/20' },
+  { bg: 'bg-cyan-500/10', text: 'text-cyan-500', border: 'border-cyan-500/20' },
+  { bg: 'bg-amber-500/10', text: 'text-amber-500', border: 'border-amber-500/20' },
+  { bg: 'bg-pink-500/10', text: 'text-pink-500', border: 'border-pink-500/20' },
+  { bg: 'bg-indigo-500/10', text: 'text-indigo-500', border: 'border-indigo-500/20' },
+  { bg: 'bg-teal-500/10', text: 'text-teal-500', border: 'border-teal-500/20' },
+  { bg: 'bg-red-500/10', text: 'text-red-500', border: 'border-red-500/20' },
+  { bg: 'bg-lime-500/10', text: 'text-lime-500', border: 'border-lime-500/20' },
 ]
 
-function cardColor(index: number): string {
-  return COLORS[index % COLORS.length]
+function markStyle(index: number) {
+  return MARK_STYLES[index % MARK_STYLES.length]
 }
 
 // ─── Component data ─────────────────────────────────────────────────────────────
@@ -90,53 +99,67 @@ const BUSINESS_COMPONENTS: CompItem[] = [
   { name: 'ProUpload', en: '高级上传', desc: '裁剪排序上传', route: ROUTES.COMP_PRO_UPLOAD },
 ]
 
-// ─── Card component ─────────────────────────────────────────────────────────────
+// ─── Card ───────────────────────────────────────────────────────────────────────
 
-function CompCard({ item, colorClass }: { item: CompItem; colorClass: string }) {
+function CompCard({ item, index }: { item: CompItem; index: number }) {
+  const style = markStyle(index)
   return (
     <Link
       to={item.route}
       className={cn(
-        'group flex flex-col gap-3 rounded-xl border bg-card p-5',
-        'transition-all duration-200 hover:border-primary hover:shadow-md hover:-translate-y-0.5',
+        'group relative flex flex-col gap-3 rounded-xl border border-border/70 bg-card p-4',
+        'transition-all duration-200 hover:-translate-y-0.5',
       )}
+      style={{ boxShadow: 'var(--shadow-card)' }}
+      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = 'var(--shadow-card-hover)' }}
+      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = 'var(--shadow-card)' }}
     >
-      <div className="flex items-start gap-3">
-        <div className={cn('w-8 h-8 rounded-lg shrink-0', colorClass)} />
-        <div className="min-w-0">
-          <p className="font-semibold text-sm leading-tight">{item.name}</p>
-          <p className="text-xs text-muted-foreground mt-0.5">{item.en}</p>
+      <div className="flex items-center justify-between">
+        {/* Icon mark */}
+        <div className={cn('flex h-9 w-9 items-center justify-center rounded-lg border text-sm font-bold', style.bg, style.text, style.border)}>
+          {item.name.charAt(0)}
         </div>
+        <ArrowUpRight
+          size={14}
+          className="text-muted-foreground/30 transition-all group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        />
       </div>
-      <p className="text-sm text-muted-foreground leading-relaxed flex-1">{item.desc}</p>
-      <div className="flex items-center gap-1 text-xs text-primary font-medium group-hover:gap-2 transition-all">
-        查看详情 <ArrowRight size={12} />
+
+      <div>
+        <p className="text-[13px] font-semibold leading-tight">{item.name}</p>
+        <p className="text-[11px] text-muted-foreground/70 mt-0.5">{item.en}</p>
       </div>
+
+      <p className="text-[12px] text-muted-foreground leading-relaxed flex-1 line-clamp-2">
+        {item.desc}
+      </p>
     </Link>
   )
 }
 
 // ─── Section ────────────────────────────────────────────────────────────────────
 
-function CompSection({
-  title,
-  items,
-  colorOffset = 0,
-}: {
+function CompSection({ title, badge, items, colorOffset = 0 }: {
   title: string
+  badge: string
   items: CompItem[]
   colorOffset?: number
 }) {
   return (
     <section className="space-y-4">
       <div className="flex items-center gap-3">
-        <div className="w-[3px] h-5 rounded-full bg-primary shrink-0" />
-        <h2 className="text-lg font-semibold">{title}</h2>
-        <span className="text-sm text-muted-foreground">({items.length} 个)</span>
+        <span
+          className="inline-flex h-5 w-1 rounded-full shrink-0"
+          style={{ background: 'linear-gradient(180deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.3) 100%)' }}
+        />
+        <h2 className="text-[15px] font-semibold tracking-tight">{title}</h2>
+        <span className="rounded-full bg-primary/8 px-2 py-0.5 text-[11px] font-medium text-primary/70">
+          {badge}
+        </span>
       </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
         {items.map((item, i) => (
-          <CompCard key={item.route} item={item} colorClass={cardColor(colorOffset + i)} />
+          <CompCard key={item.route} item={item} index={colorOffset + i} />
         ))}
       </div>
     </section>
@@ -147,17 +170,29 @@ function CompSection({
 
 export default function ComponentsIndexPage() {
   return (
-    <div className="p-6 space-y-10 max-w-7xl mx-auto">
+    <div className="p-6 space-y-10 max-w-[1400px] mx-auto">
       {/* Page header */}
-      <div className="space-y-1.5">
-        <h1 className="text-2xl font-bold tracking-tight">组件库</h1>
-        <p className="text-muted-foreground text-sm">
+      <div className="space-y-2">
+        <h1 className="text-2xl font-bold tracking-tight" style={{ letterSpacing: '-0.02em' }}>
+          组件库
+        </h1>
+        <p className="text-[14px] text-muted-foreground leading-relaxed max-w-xl">
           覆盖 60 个高频业务场景的完整组件体系，基于 shadcn/ui + Radix UI + Tailwind CSS 构建。
         </p>
       </div>
 
-      <CompSection title="基础组件" items={BASIC_COMPONENTS} colorOffset={0} />
-      <CompSection title="业务组件" items={BUSINESS_COMPONENTS} colorOffset={BASIC_COMPONENTS.length} />
+      <CompSection
+        title="基础组件"
+        badge={`${BASIC_COMPONENTS.length} 个`}
+        items={BASIC_COMPONENTS}
+        colorOffset={0}
+      />
+      <CompSection
+        title="业务组件"
+        badge={`${BUSINESS_COMPONENTS.length} 个`}
+        items={BUSINESS_COMPONENTS}
+        colorOffset={BASIC_COMPONENTS.length}
+      />
     </div>
   )
 }

@@ -39,7 +39,7 @@ export default function SelectPage() {
     })), [])
 
   return (
-    <div className="p-6 space-y-10 max-w-5xl">
+    <div className="preview-page">
       <PageHeader
         title="Select 选择器"
         description="下拉选择组件。AppSelect 封装了本地搜索、远程搜索、虚拟滚动；VirtualSelect 支持10万条数据流畅渲染和多选。"
